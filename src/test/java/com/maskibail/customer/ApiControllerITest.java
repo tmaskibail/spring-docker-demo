@@ -19,11 +19,8 @@ import org.testcontainers.containers.MySQLContainer;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(initializers = {ApiControllerITest.Initializer.class})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ApiControllerITest {
-    @ClassRule
-    public static final MySQLContainer MY_SQL_CONTAINER = new MySQLContainer();
     private static final Logger LOG = LoggerFactory.getLogger(ApiControllerITest.class);
 
     @Autowired
@@ -31,24 +28,8 @@ public class ApiControllerITest {
 
     @Test
     void testOne() {
-
         if (customerRepository != null) {
             customerRepository.findAll().forEach(s -> System.out.println(s.toString()));
-        }
-    }
-
-    static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-        @Override
-        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            if(MY_SQL_CONTAINER.isRunning()!= true) {
-                MY_SQL_CONTAINER.start();
-            }
-
-            TestPropertyValues.of(
-                    "spring.datasource.url=" + MY_SQL_CONTAINER.getJdbcUrl(),
-                    "spring.datasource.username=" + MY_SQL_CONTAINER.getUsername(),
-                    "spring.datasource.password=" + MY_SQL_CONTAINER.getPassword())
-                    .applyTo(configurableApplicationContext.getEnvironment());
         }
     }
 }
