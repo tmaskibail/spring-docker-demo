@@ -1,7 +1,8 @@
-package com.maskibail.java.demo.controller;
+package com.maskibail.customer.controller;
 
-import com.maskibail.java.demo.domain.Customer;
-import com.maskibail.java.demo.repository.CustomerRepository;
+
+import com.maskibail.customer.domain.Customer;
+import com.maskibail.customer.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 @RestController
-public class ServiceController {
-    public static final Logger LOG = LoggerFactory.getLogger(ServiceController.class);
+public class ApiController {
+    public static final Logger LOG = LoggerFactory.getLogger(ApiController.class);
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -24,7 +25,7 @@ public class ServiceController {
     }
 
     @PostMapping(path = "/addCustomer")
-    public String addNewCustomer(
+    public Customer addNewCustomer(
             @RequestParam String firstName,
             @RequestParam String lastName,
             @RequestParam String title,
@@ -39,7 +40,7 @@ public class ServiceController {
         customerRepository.save(customer);
 
         LOG.info("Persisted user {}, {} with id {} successfully", firstName, lastName, customer.getId());
-        return String.format("Saved the customer %s, %s successfully", firstName, lastName);
+        return customer;
     }
 
     @GetMapping(value = "/liveness")

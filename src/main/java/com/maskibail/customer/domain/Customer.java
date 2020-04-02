@@ -1,16 +1,15 @@
-package com.maskibail.java.demo.domain;
+package com.maskibail.customer.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name="customer")
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "customer_id_generator", sequenceName = "customer_id_sequence", allocationSize = 1)
+    @GeneratedValue(generator = "customer_id_generator")
     private Integer id;
 
     private String title;

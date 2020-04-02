@@ -1,31 +1,7 @@
-#### Build Image
-`docker build -t tmaskibail/spring-boot-docker .`
+### Build project using two approches ###
 
-#### Run container
-`docker run -p 8080:8080 -t tmaskibail/spring-boot-docker`
+* [Using Dockerfile](docs/plain-old-docker-instructions.md)
+* [Using Jib](docs/jib-based-docker-image-build.md)
+ 
 
-#### list process
-`docker ps`
-
-#### shutdown process
-`docker stop <name/container id from previous command>`
-
-#### delete container
-`docker rm <>`
-
-#### Use spring profile
-`docker run -e "SPRING_PROFILES_ACTIVE=prod" -p 8080:8080 -t tmaskibail/spring-boot-docker`
-
-#### Only on WINDOWS : Access app on container using JPDA
-`docker run -e "JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t tmaskibail/spring-boot-docker`
-
-### Azure Container 
-
-#### Login to Azure container registry 
-`az acr login --name <acrName>`
-
-#### Tag the local docker image
-`docker tag tmaskibail/spring-boot-docker <>.azurecr.io/spring-boot-docker:v1`
-
-#### Push docker image 
-`docker push <>.azurecr.io/spring-boot-docker:v1`
+### Endpoints 

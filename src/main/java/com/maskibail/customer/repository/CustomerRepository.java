@@ -1,8 +1,8 @@
-package com.maskibail.java.demo.repository;
+package com.maskibail.customer.repository;
 
-import com.maskibail.java.demo.domain.Customer;
+
+import com.maskibail.customer.domain.Customer;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 }
